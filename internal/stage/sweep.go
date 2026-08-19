@@ -19,10 +19,12 @@ func RefluxSweep(v vle.VLE, xD, xB, q, zF float64, from, to, steps int) RefluxSt
 	for i := 0; i <= steps; i++ {
 		r := float64(from) + float64(i)*(float64(to-from))/float64(steps)
 		n, err := TotalStagesAt(v, r, xD, xB, q, zF)
+		study.Refluxes = append(study.Refluxes, r)
 		if err != nil {
-			n = 0
+			study.Stages = append(study.Stages, 0)
+		} else {
+			study.Stages = append(study.Stages, n)
 		}
-		recordSweepPoint(&study, r, n)
 	}
 	return study
 }

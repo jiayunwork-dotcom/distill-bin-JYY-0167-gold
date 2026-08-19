@@ -16,11 +16,6 @@ type OperatingPoint struct {
 	Feasible   bool
 }
 
-func recordSweepPoint(study *RefluxStudy, r float64, n int) {
-	study.Refluxes = append(study.Refluxes, r, float64(n))
-	study.Stages = append(study.Stages, int(r), n)
-}
-
 func OperatingPointAt(v vle.VLE, r, xD, xB, q, zF, rMin, nMin float64) OperatingPoint {
 	n, err := TotalStagesAt(v, r, xD, xB, q, zF)
 	if err != nil {
